@@ -15,25 +15,25 @@ const ChelRecommends = () => {
                     <img src={cardImg} alt="" className='w-full h-80 object-cover pb-8' />
                     <h2 className="text-2xl font-Ineter pb-2 font-semibold ">Caeser Salad</h2>
                     <p className="text-base font-Ineter pb-6 ">Lettuce, Eggs, Parmesan Cheese, Chicken Breast Fillets.</p>
-                    <button className='btn uppercase mb-8'>Add To Card</button>
+                    <button className='btn text-xl font-semibold text-yellow-600 border-yellow-600 border-0 border-b-4  mb-8'>Add To Card</button>
                 </div>
                 <div className="border  bg-gray-100">
                     <img src={cardImg} alt="" className='w-full h-80 object-cover pb-8' />
                     <h2 className="text-2xl font-Ineter pb-2 font-semibold ">Caeser Salad</h2>
                     <p className="text-base font-Ineter pb-6 ">Lettuce, Eggs, Parmesan Cheese, Chicken Breast Fillets.</p>
-                    <button className='btn uppercase mb-8'>Add To Card</button>
+                    <button className='btn text-xl font-semibold text-yellow-600 border-yellow-600 border-0 border-b-4  mb-8'>Add To Card</button>
                 </div>
                 <div className="border  bg-gray-100">
                     <img src={cardImg} alt="" className='w-full h-80 object-cover pb-8' />
                     <h2 className="text-2xl font-Ineter pb-2 font-semibold ">Caeser Salad</h2>
                     <p className="text-base font-Ineter pb-6 ">Lettuce, Eggs, Parmesan Cheese, Chicken Breast Fillets.</p>
-                    <button className='btn uppercase mb-8'>Add To Card</button>
+                    <button className='btn text-xl font-semibold text-yellow-600 border-yellow-600 border-0 border-b-4  mb-8'>Add To Card</button>
                 </div>
                 <div className="border  bg-gray-100">
                     <img src={cardImg} alt="" className='w-full h-80 object-cover pb-8' />
                     <h2 className="text-2xl font-Ineter pb-2 font-semibold ">Caeser Salad</h2>
                     <p className="text-base font-Ineter pb-6 ">Lettuce, Eggs, Parmesan Cheese, Chicken Breast Fillets.</p>
-                    <button className='btn uppercase mb-8'>Add To Card</button>
+                    <button className='btn text-xl font-semibold text-yellow-600 border-yellow-600 border-0 border-b-4  mb-8'>Add To Card</button>
                 </div>
             </div>
         </section>
