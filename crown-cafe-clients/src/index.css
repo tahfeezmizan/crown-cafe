@@ -15,14 +15,15 @@ ul.thumbs.animated {
     text-align: center;
 }
 
-ul.slider.animated {
+ul.slider.animated,
+.menuCover {
     height: calc(100vh - 70px);
 }
 
 .custom-border-radius {
-    @apply rounded-none; /* Apply no border-radius initially */
+    @apply rounded-none;
+    /* Apply no border-radius initially */
     border-top-right-radius: 200px;
     border-bottom-right-radius: 200px;
     border-bottom-left-radius: 200px;
-  }
-  
+}
