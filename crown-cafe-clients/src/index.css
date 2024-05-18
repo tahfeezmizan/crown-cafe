@@ -1,0 +1,28 @@
+/* "Cinzel", serif */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
+/* "Inter", sans-serif */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.navMenu {
+    background: #0000004d;
+}
+
+ul.thumbs.animated {
+    text-align: center;
+}
+
+ul.slider.animated {
+    height: calc(100vh - 70px);
+}
+
+.custom-border-radius {
+    @apply rounded-none; /* Apply no border-radius initially */
+    border-top-right-radius: 200px;
+    border-bottom-right-radius: 200px;
+    border-bottom-left-radius: 200px;
+  }
+  
