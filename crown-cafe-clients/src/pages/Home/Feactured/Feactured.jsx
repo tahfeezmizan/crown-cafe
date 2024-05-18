@@ -3,7 +3,7 @@ import BgImage from "../../../assets/home/featured.jpg"
 
 const Feactured = () => {
     return (
-        <section style={{
+        <section className="bg-fixed" style={{
             background: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${BgImage})`,
             backgroundPosition: 'center',
             backgroundSize: 'cover',
