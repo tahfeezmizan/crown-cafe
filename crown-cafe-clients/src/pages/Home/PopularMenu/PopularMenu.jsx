@@ -6,18 +6,6 @@ const PopularMenu = () => {
     const [menu] = useMenu();
     const popular = menu.filter(item => item.category === "popular");
 
-    // const [menu, setMenu] = useState([]);
-
-    // useEffect(() => {
-    //     fetch('./menu.json')
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             console.log(data);
-    //             const popularItem = data.filter(item => item.categories === 'popular')
-    //             setMenu(data)
-    //         })
-    // }, [])
-
     return (
         <div>
             <section className='container mx-auto px-16 py-20'>

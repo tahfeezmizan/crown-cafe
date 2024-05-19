@@ -1,6 +1,6 @@
 import { Parallax } from 'react-parallax';
 
-const Cover = ({ image, title }) => {
+const Cover = ({ image, title, description }) => {
     return (
         <Parallax
             blur={{ min: -20, max: 20 }}
@@ -16,7 +16,7 @@ const Cover = ({ image, title }) => {
             }}>
                 <div className="container mx-auto py-32 bg-[rgba(21,21,21,0.6)] text-white text-center">
                     <h1 className="text-7xl font-Cinezl font-bold mb-2">{title}</h1>
-                    <p className="text-2xl font-semibold">Would you like to try a dish?</p>
+                    <p className="text-2xl font-semibold">{description}</p>
                 </div>
             </div>
         </Parallax>

@@ -15,9 +15,12 @@ ul.thumbs.animated {
     text-align: center;
 }
 
-ul.slider.animated,
-.menuCover {
+ul.slider.animated {
     height: calc(100vh - 70px);
+}
+
+.menuCover {
+    height: calc(100vh - 120px);
 }
 
 .custom-border-radius {
