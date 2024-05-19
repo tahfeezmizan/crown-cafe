@@ -14,7 +14,7 @@ const Menu = () => {
 
             <section className="py-20">
                 <SectionTitle subHeading="Don't miss" Heading="TODAY'S OFFER"></SectionTitle>
-                <MenuItem></MenuItem>
+                
             </section>
 
         </div>
