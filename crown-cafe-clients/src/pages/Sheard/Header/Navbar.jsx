@@ -5,15 +5,10 @@ const Navbar = () => {
     // const profileAvater = 'https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg'
     const links = <>
         <li><NavLink to='/'>Home</NavLink></li>
-        {/* {user ? */}
-            <>
-                <li><NavLink to='/menu'>Our Menu</NavLink></li>
-                <li><NavLink to='/order'>Our Shop</NavLink></li>
-            </>
-            {/* : '' */}
-        {/* } */}
+        <li><NavLink to='/menu'>Our Menu</NavLink></li>
+        <li><NavLink to='/order'>Our Shop</NavLink></li>
     </>
- 
+
     return (
         <div className="navMenu fixed left-0 right-0 top-0 z-50 py-2">
             <div className="container mx-auto navbar text-white">
@@ -38,7 +33,7 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-end z-[1000]">
                     {/* {user ? */}
-                        {/* <div className="dropdown dropdown-end">
+                    {/* <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
                                      <img alt="Tailwind CSS Navbar component" src={user?.photoURL || profileAvater} /> 
@@ -61,13 +56,13 @@ const Navbar = () => {
                             </ul>
                         </div> : */}
 
-                        <div className="flex gap-4">
-                            <NavLink
-                                className="btn btn-outline bg-primaryColor font-semibold text-white text-base" to="/login">Login</NavLink>
-                        </div>
+                    <div className="flex gap-4">
+                        <NavLink
+                            className="btn btn-outline bg-primaryColor font-semibold text-white text-base" to="/login">Login</NavLink>
+                    </div>
                 </div>
             </div>
-            </div>
+        </div>
     );
 };
 

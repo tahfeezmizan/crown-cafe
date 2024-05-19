@@ -8,11 +8,12 @@ import TabCard from "./TabCard/TabCard";
 import { useParams } from "react-router-dom";
 
 const Order = () => {
-    const [tabIndex, setTabIndex] = useState(0);
-    const [menu] = useMenu();
-
+    const categories = ['salad', 'pizza', 'soup', 'dessert', 'drinks']
     const { category } = useParams();
-    console.log(category);
+    const initialIndex = categories.indexOf(category);
+
+    const [tabIndex, setTabIndex] = useState(initialIndex);
+    const [menu] = useMenu();
 
     const dessert = menu.filter(item => item.category === "dessert");
     const pizza = menu.filter(item => item.category === "pizza");
