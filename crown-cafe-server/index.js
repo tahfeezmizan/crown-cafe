@@ -40,8 +40,16 @@ async function run() {
             }
         })
 
-
-       
+        // get reviews data 
+        app.get("/reviews", async (req, res) => {
+            try {
+                const result = await reviewsCollection.find().toArray();
+                res.send(result)
+            } catch (error) {
+                console.error("Error fetching queries:", error);
+                res.status(500).send("Error fetching queries");
+            }
+        })
 
 
         // Send a ping to confirm a successful connection
