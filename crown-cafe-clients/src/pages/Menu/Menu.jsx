@@ -12,12 +12,12 @@ import SectionTitle from "../../components/SectionTitle/SectionTitle";
 
 const Menu = () => {
     const [menu] = useMenu();
+
     const offered = menu.filter(item => item.category === "offered");
     const dessert = menu.filter(item => item.category === "dessert");
     const pizza = menu.filter(item => item.category === "pizza");
     const salad = menu.filter(item => item.category === "salad");
     const soup = menu.filter(item => item.category === "soup");
-
 
     return (
         <div>
@@ -34,50 +34,38 @@ const Menu = () => {
             </section >
 
             <section>
-                <Cover image={dessertImg} title="DESSERTS"
+                <Cover image={dessertImg} title="dessert"
                     description="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
                 ></Cover>
                 <div className=" container mx-auto px-16 py-20">
-                    <MenuCategory items={offered}></MenuCategory>
-                    <div className="text-center">
-                        <button className="btn btn-outline text-xl font-semibold border-0 border-b-4 mt-14">ORDER YOUR FAVOURITE FOOD </button>
-                    </div>
+                    <MenuCategory items={dessert} title="dessert" ></MenuCategory>
                 </div>
             </section >
 
             <section>
-                <Cover image={pizzaImg} title="DESSERTS"
+                <Cover image={pizzaImg} title="pizza"
                     description="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
                 ></Cover>
                 <div className=" container mx-auto px-16 py-20">
-                    <MenuCategory items={pizza}></MenuCategory>
-                    <div className="text-center">
-                        <button className="btn btn-outline text-xl font-semibold border-0 border-b-4 mt-14">ORDER YOUR FAVOURITE FOOD </button>
-                    </div>
+                    <MenuCategory items={pizza} title="pizza"></MenuCategory>
                 </div>
             </section >
 
             <section>
-                <Cover image={saladImg} title="DESSERTS"
+                <Cover image={saladImg} title="salad"
                     description="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
                 ></Cover>
                 <div className=" container mx-auto px-16 py-20">
-                    <MenuCategory items={salad}></MenuCategory>
-                    <div className="text-center">
-                        <button className="btn btn-outline text-xl font-semibold border-0 border-b-4 mt-14">ORDER YOUR FAVOURITE FOOD </button>
-                    </div>
+                    <MenuCategory items={salad} title="salad"></MenuCategory>
                 </div>
             </section >
 
             <section>
-                <Cover image={soupImg} title="DESSERTS"
+                <Cover image={soupImg} title="soup"
                     description="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
                 ></Cover>
                 <div className=" container mx-auto px-16 py-20">
-                    <MenuCategory items={soup}></MenuCategory>
-                    <div className="text-center">
-                        <button className="btn btn-outline text-xl font-semibold border-0 border-b-4 mt-14">ORDER YOUR FAVOURITE FOOD </button>
-                    </div>
+                    <MenuCategory items={soup} title="soup"></MenuCategory>
                 </div>
             </section >
 

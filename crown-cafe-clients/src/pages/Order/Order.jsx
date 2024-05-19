@@ -5,11 +5,15 @@ import useMenu from "../../Hook/useMenu";
 import shopImg from '../../assets/shop/banner2.jpg';
 import Cover from "../Menu/Cover/Cover";
 import TabCard from "./TabCard/TabCard";
+import { useParams } from "react-router-dom";
 
 const Order = () => {
     const [tabIndex, setTabIndex] = useState(0);
     const [menu] = useMenu();
-    const offered = menu.filter(item => item.category === "offered");
+
+    const { category } = useParams();
+    console.log(category);
+
     const dessert = menu.filter(item => item.category === "dessert");
     const pizza = menu.filter(item => item.category === "pizza");
     const salad = menu.filter(item => item.category === "salad");
