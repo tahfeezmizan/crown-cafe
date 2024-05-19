@@ -27,7 +27,7 @@ const Menu = () => {
             <Cover image={bgImg} title="OUR MENU"></Cover>
 
             <section>
-                <div className=" container mx-auto px-16 py-20">
+                <div className="container mx-auto px-16 py-20">
                     <SectionTitle subHeading="Don't miss" Heading="TODAY'S OFFER"></SectionTitle>
                     <MenuCategory items={offered}></MenuCategory>
                 </div>

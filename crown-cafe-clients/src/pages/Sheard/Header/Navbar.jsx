@@ -8,7 +8,7 @@ const Navbar = () => {
         {/* {user ? */}
             <>
                 <li><NavLink to='/menu'>Our Menu</NavLink></li>
-                <li><NavLink to='/bookings'>My Bookings</NavLink></li>
+                <li><NavLink to='/order'>Our Shop</NavLink></li>
             </>
             {/* : '' */}
         {/* } */}
