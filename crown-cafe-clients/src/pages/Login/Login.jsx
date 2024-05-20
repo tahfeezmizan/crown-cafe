@@ -1,16 +1,24 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import loginImg from "../../assets/others/authentication2 1.png"
 import loginBg from "../../assets/others/authentication.png"
+import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 
 const Login = () => {
+    const captchaRef = useRef(null);
+    const [disabled, setDisabled] = useState(true);
+
     const [showPassword, setShowPassword] = useState(false);
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
+
+    useEffect(() => {
+        loadCaptchaEnginge(6);
+    }, [])
 
     const {
         register,
@@ -22,6 +30,18 @@ const Login = () => {
         const { email, password } = data;
         console.log(email, password);
     }
+
+    const handleValidateCaptcha = () => {
+        const user_captcha_value = captchaRef.current.value;
+        if(validateCaptcha(user_captcha_value) === true){
+            alert('validated captcha')
+            setDisabled(false)
+        }else{
+            setDisabled(true)
+            alert('Captcha Does Not Match');
+        }
+    }
+
 
     return (
         <div className="h-screen py-20" style={{
@@ -74,8 +94,25 @@ const Login = () => {
                                 </div>
                                 {errors.password && <span className="text-xs text-red-500">Password is required</span>}
                             </div>
+
+                            <div className="form-control">
+                                <label className="label">
+                                    < LoadCanvasTemplate />
+                                </label>
+                                <input
+                                    type="text"
+                                    name="captch"
+                                    ref={captchaRef}
+                                    placeholder="Type above text"
+                                    className="input input-bordered rounded-none"
+                                    // {...register("email", { required: true })}
+                                />
+                                <button onClick={handleValidateCaptcha} className="btn btn-xs mt-3">validate Captcha</button>
+                                {errors.captch && <span className="text-xs text-red-500">Captch is required</span>}
+                            </div>
+
                             <div className="form-control pt-5">
-                                <button className="btn bg-yellow-600 hover:bg-yellow-700  border-none rounded-none text-white text-xl font-bold">Login</button>
+                                <button disabled={disabled} className="btn bg-yellow-600 hover:bg-yellow-700  border-none rounded-none text-white text-xl font-bold">Login</button>
                             </div>
                         </form>
                         {/* third party login method */}
