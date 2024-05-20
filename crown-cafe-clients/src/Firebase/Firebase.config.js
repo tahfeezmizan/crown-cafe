@@ -6,14 +6,15 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBeGwBP7jufkkKY_UA7n7Ou3vMtZ9AzHTk",
-    authDomain: "crown-cafe-ea80d.firebaseapp.com",
-    projectId: "crown-cafe-ea80d",
-    storageBucket: "crown-cafe-ea80d.appspot.com",
-    messagingSenderId: "1032953945230",
-    appId: "1:1032953945230:web:09a32affc1ba52df93bddf"
+    apiKey: import.meta.env.VITE_APIKEY,
+    authDomain: import.meta.env.VITE_AUTHDOMAIN,
+    projectId: import.meta.env.VITE_PROJECTID,
+    storageBucket: import.meta.env.VITE_STORAGEBUCKET,
+    messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
+    appId: import.meta.env.VITE_APPID
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app)
+export default auth;
