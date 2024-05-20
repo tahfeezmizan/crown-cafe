@@ -7,6 +7,8 @@ import Menu from "../pages/Menu/Menu";
 import Order from "../pages/Order/Order";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import NetFlex from "../pages/Sheard/NetFlex";
+import PrivateRoutes from "./PrivateRoutes";
 
 const router = createBrowserRouter([
     {
@@ -32,6 +34,12 @@ const router = createBrowserRouter([
             {
                 path: 'register',
                 element: <Register></Register>
+            },
+            {
+                path: 'netflix',
+                element: <PrivateRoutes>
+                    <NetFlex></NetFlex>
+                </PrivateRoutes>
             }
         ]
     },

@@ -13,6 +13,7 @@ const Navbar = () => {
     const links = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/menu'>Our Menu</NavLink></li>
+        <li><NavLink to='/netflix'>netflix</NavLink></li>
         <li><NavLink to='/order'>Our Shop</NavLink></li>
 
         {user ? <>
