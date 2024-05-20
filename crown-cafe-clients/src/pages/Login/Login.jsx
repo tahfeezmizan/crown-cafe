@@ -2,14 +2,16 @@ import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import loginImg from "../../assets/others/authentication2 1.png"
 import loginBg from "../../assets/others/authentication.png"
-import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+import UseAuth from "../../Hook/UseAuth";
 
 const Login = () => {
-    const captchaRef = useRef(null);
+    const { singInUser } = UseAuth();
     const [disabled, setDisabled] = useState(true);
+    const navigate = useNavigate();
 
     const [showPassword, setShowPassword] = useState(false);
     const togglePasswordVisibility = () => {
@@ -28,15 +30,22 @@ const Login = () => {
 
     const onSubmit = (data) => {
         const { email, password } = data;
-        console.log(email, password);
+        // console.log(email, password);
+
+        singInUser(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                navigate('/')
+                alert('User Sing In Sucessfully')
+            })
     }
 
-    const handleValidateCaptcha = () => {
-        const user_captcha_value = captchaRef.current.value;
-        if(validateCaptcha(user_captcha_value) === true){
-            alert('validated captcha')
+    const handleValidateCaptcha = (e) => {
+        const user_captcha_value = e.target.value;
+        if (validateCaptcha(user_captcha_value) === true) {
             setDisabled(false)
-        }else{
+        } else {
             setDisabled(true)
             alert('Captcha Does Not Match');
         }
@@ -102,13 +111,10 @@ const Login = () => {
                                 <input
                                     type="text"
                                     name="captch"
-                                    ref={captchaRef}
+                                    onBlur={handleValidateCaptcha}
                                     placeholder="Type above text"
                                     className="input input-bordered rounded-none"
-                                    // {...register("email", { required: true })}
                                 />
-                                <button onClick={handleValidateCaptcha} className="btn btn-xs mt-3">validate Captcha</button>
-                                {errors.captch && <span className="text-xs text-red-500">Captch is required</span>}
                             </div>
 
                             <div className="form-control pt-5">

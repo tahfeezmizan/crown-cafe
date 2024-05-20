@@ -1,12 +1,27 @@
 import { Link, NavLink } from "react-router-dom";
+import UseAuth from "../../../Hook/UseAuth";
 
 const Navbar = () => {
-    // const { user, singOutUser } = UseAuth();
-    // const profileAvater = 'https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg'
+    const { user, logOut } = UseAuth();
+
+    const handleLogout = () => {
+        logOut(() => { })
+            // .then(() => { })
+            // .catch(error => console.log(error));
+    }
+
     const links = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/menu'>Our Menu</NavLink></li>
         <li><NavLink to='/order'>Our Shop</NavLink></li>
+
+        {user ? <>
+            <button onClick={handleLogout} className="font-semibold text-white text-base">Sing Out</button>
+        </> :
+            <>
+                <li><NavLink to="/login">Sing In</NavLink></li>
+            </>
+        }
     </>
 
     return (
@@ -29,10 +44,6 @@ const Navbar = () => {
                 <div className="navbar-center hidden lg:flex navbar-end">
                     <ul className="menu menu-horizontal items-center px-1 gap-5 felx">
                         {links}
-                        <div className="flex gap-4">
-                            <NavLink
-                                className="font-semibold text-white text-base" to="/login">Login</NavLink>
-                        </div>
                     </ul>
                 </div>
             </div>
