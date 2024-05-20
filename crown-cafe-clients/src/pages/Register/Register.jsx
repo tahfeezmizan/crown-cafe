@@ -5,12 +5,13 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import loginImg from "../../assets/others/authentication2 1.png"
 import loginBg from "../../assets/others/authentication.png"
+import UseAuth from "../../Hook/UseAuth";
 
 
 
 const Register = () => {
-    const captchaRef = useRef(null);
-    const [disabled, setDisabled] = useState(true);
+    const [createUser] = UseAuth();
+    // const [disabled, setDisabled] = useState(true);
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -26,6 +27,9 @@ const Register = () => {
     const onSubmit = (data) => {
         const { email, password } = data;
         console.log(email, password);
+
+        createUser(email, password)
+        .then()
     }
 
 

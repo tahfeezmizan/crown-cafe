@@ -20,7 +20,6 @@ const Testimonials = () => {
             })
     }, [])
 
-    console.log(reviews);
     return (
         <section className="container mx-auto py-28">
             <SectionTitle
