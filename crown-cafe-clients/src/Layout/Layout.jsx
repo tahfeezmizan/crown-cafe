@@ -5,6 +5,7 @@ import Footer from "../pages/Sheard/Footer/Footer";
 const Layout = () => {
     const location = useLocation();
     const isLogin = location.pathname.includes('login');
+    const isRegister = location.pathname.includes('register');
 
     return (
         <div>

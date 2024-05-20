@@ -90,7 +90,7 @@ const Register = () => {
                             <div className="divider pb-3">or connected with</div>
                         </div>
 
-                        <h3 className="text-center pt-5">Need an account? <Link to="/register" className="text-blue-600 hover:text-[#d01818] font-bold">Create Account</Link></h3>
+                        <h3 className="text-center pt-5">Have an account? <Link to="/login" className="text-blue-600 hover:text-[#d01818] font-bold">Create Account</Link></h3>
                     </div>
                 </div>
 
