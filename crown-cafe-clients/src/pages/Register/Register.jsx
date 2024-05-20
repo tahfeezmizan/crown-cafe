@@ -3,14 +3,15 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import loginBg from "../../assets/others/authentication.png";
 import loginImg from "../../assets/others/authentication2 1.png";
 import UseAuth from "../../Hook/UseAuth";
 
 const Register = () => {
-    const { createUser, user } = UseAuth();
+    const { createUser, updateUserProfile } = UseAuth();
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -19,17 +20,25 @@ const Register = () => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm();
 
     const onSubmit = (data) => {
-        const { name, email, password } = data;
+        const { name, photoUrl, email, password } = data;
         console.log(data);
 
         createUser(email, password)
             .then(result => {
                 const signUpUser = result.user;
                 console.log(signUpUser);
+                updateUserProfile(name, photoUrl)
+                    .then(() => {
+                        alert('User Profile Update');
+                        reset();
+                        navigate('/')
+                    })
+                    .catch(error => console.log(error))
             })
             .catch(error => {
                 // console.error("Error creating user:", error);
@@ -60,6 +69,21 @@ const Register = () => {
                                 />
                                 {errors.name && <span className="text-xs text-red-500">{errors.name.message}</span>}
                             </div>
+
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">photo Url</span>
+                                </label>
+                                <input
+                                    type="photoUrl"
+                                    name="photoUrl"
+                                    placeholder="Enter Your Photo Url"
+                                    className="input input-bordered rounded-none"
+                                    {...register("photoUrl", { required: "Photo Url is required" })}
+                                />
+                                {errors.photoUrl && <span className="text-xs text-red-500">{errors.photoUrl.message}</span>}
+                            </div>
+
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
@@ -79,6 +103,7 @@ const Register = () => {
                                 />
                                 {errors.email && <span className="text-xs text-red-500">{errors.email.message}</span>}
                             </div>
+
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Password</span>
@@ -101,6 +126,7 @@ const Register = () => {
                                 </div>
                                 {errors.password && <span className="text-xs text-red-500">{errors.password.message}</span>}
                             </div>
+
                             <div className="form-control pt-5">
                                 <input type="submit" value="Sign Up" className="btn bg-yellow-600 hover:bg-yellow-700 border-none rounded-none text-white text-xl font-bold" />
                             </div>

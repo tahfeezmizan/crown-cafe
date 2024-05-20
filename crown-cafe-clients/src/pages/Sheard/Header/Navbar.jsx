@@ -6,8 +6,8 @@ const Navbar = () => {
 
     const handleLogout = () => {
         logOut(() => { })
-            // .then(() => { })
-            // .catch(error => console.log(error));
+        // .then(() => { })
+        // .catch(error => console.log(error));
     }
 
     const links = <>
@@ -17,6 +17,7 @@ const Navbar = () => {
         <li><NavLink to='/order'>Our Shop</NavLink></li>
 
         {user ? <>
+lili
             <button onClick={handleLogout} className="font-semibold text-white text-base">Sing Out</button>
         </> :
             <>
