@@ -1,8 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 import UseAuth from "../../../Hook/UseAuth";
+import { BsCart2 } from "react-icons/bs";
+import { axiosSecure } from "../../../Hook/AxiosSecure";
 
 const Navbar = () => {
     const { user, logOut } = UseAuth();
+
+    axiosSecure.get('/carts')
 
     const handleLogout = () => {
         logOut(() => { })
@@ -14,10 +18,16 @@ const Navbar = () => {
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/menu'>Our Menu</NavLink></li>
         <li><NavLink to='/netflix'>netflix</NavLink></li>
-        <li><NavLink to='/order'>Our Shop</NavLink></li>
+        <li><NavLink to='/order/salad'>Our Shop</NavLink></li>
+        <li><Link to='/order/salad'>
+            <button className="btn btn-sm">
+                <BsCart2 />
+                <div className="badge badge-secondary">+0</div>
+            </button>
+        </Link></li>
 
         {user ? <>
-lili
+            <Link className="">{user?.displayName}</Link>
             <button onClick={handleLogout} className="font-semibold text-white text-base">Sing Out</button>
         </> :
             <>

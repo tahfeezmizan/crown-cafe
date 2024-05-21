@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
-import useMenu from "../../Hook/useMenu";
-import shopImg from '../../assets/shop/banner2.jpg';
 import Cover from "../Menu/Cover/Cover";
 import TabCard from "./TabCard/TabCard";
+import 'react-tabs/style/react-tabs.css';
+import useMenu from "../../Hook/useMenu";
 import { useParams } from "react-router-dom";
+import shopImg from '../../assets/shop/banner2.jpg';
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 
 const Order = () => {
     const categories = ['salad', 'pizza', 'soup', 'dessert', 'drinks']

@@ -13,7 +13,8 @@ const Login = () => {
     const [disabled, setDisabled] = useState(true);
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location?.state?.from?.pathname || '/'
+    const from = location?.state?.from?.pathname || '/';
+    console.log("login page location pathname", location.state);
 
     const [showPassword, setShowPassword] = useState(false);
     const togglePasswordVisibility = () => {
@@ -120,7 +121,7 @@ const Login = () => {
                             </div>
 
                             <div className="form-control pt-5">
-                                <button disabled={disabled} className="btn bg-yellow-600 hover:bg-yellow-700  border-none rounded-none text-white text-xl font-bold">Login</button>
+                                <button disabled={false} className="btn bg-yellow-600 hover:bg-yellow-700  border-none rounded-none text-white text-xl font-bold">Login</button>
                             </div>
                         </form>
                         {/* third party login method */}
