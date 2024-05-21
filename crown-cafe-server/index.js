@@ -8,7 +8,7 @@ app.use(express.json())
 app.use(cors())
 
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.7utjicv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
@@ -56,7 +56,9 @@ async function run() {
         // get cart added product 
         app.get("/carts", async (req, res) => {
             try {
-                const result = await cartCollection.find().toArray();
+                const email = req.query.email;
+                const query = { email: email }
+                const result = await cartCollection.find(query).toArray();
                 res.send(result)
             } catch (error) {
                 console.error("Error fetching queries:", error);
@@ -74,6 +76,19 @@ async function run() {
             } catch (error) {
                 console.error("Error fetching queries:", error);
                 res.status(500).send("Error fetching queries");
+            }
+        });
+
+
+        //
+        app.delete("/carts/:id", async (req, res) => {
+            try {
+                const id = req.params.id;
+                const query = { _id: new ObjectId(id) };
+                const result = await cartCollection.deleteOne(query)
+                res.send(result)
+            } catch (error) {
+
             }
         })
 

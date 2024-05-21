@@ -17,10 +17,13 @@ const Dashboard = () => {
                     <li><NavLink to="/dashboard/mycart"><FaShoppingCart/> My Cart</NavLink></li>
                     <li><NavLink to="/dashboard/addreview">Add Review</NavLink></li>
                     <li><NavLink to="/dashboard/mybooking">My Booking</NavLink></li>
+                    
+                    <div className="divider divider-neutral"></div>
+                    <li><NavLink to="/"><FaHome />Home</NavLink></li>
                 </ul>
             </div>
 
-            <div className="bg-gray-300 flex-1">
+            <div className="bg-gray-300 flex-1 p-10">
                 <Outlet></Outlet>
             </div>
         </div>
