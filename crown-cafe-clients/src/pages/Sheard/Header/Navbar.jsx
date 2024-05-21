@@ -1,12 +1,11 @@
+import { BsCart2 } from "react-icons/bs";
 import { Link, NavLink } from "react-router-dom";
 import UseAuth from "../../../Hook/UseAuth";
-import { BsCart2 } from "react-icons/bs";
-import { axiosSecure } from "../../../Hook/AxiosSecure";
+import UseCarts from "../../../Hook/UseCarts";
 
 const Navbar = () => {
     const { user, logOut } = UseAuth();
-
-    axiosSecure.get('/carts')
+    const [cart] = UseCarts();
 
     const handleLogout = () => {
         logOut(() => { })
@@ -22,7 +21,7 @@ const Navbar = () => {
         <li><Link to='/order/salad'>
             <button className="btn btn-sm">
                 <BsCart2 />
-                <div className="badge badge-secondary">+0</div>
+                <div className="badge badge-secondary">+{cart.length}</div>
             </button>
         </Link></li>
 
