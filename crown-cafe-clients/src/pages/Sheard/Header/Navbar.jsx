@@ -19,7 +19,8 @@ const Navbar = () => {
         <li><NavLink to='/menu'>Our Menu</NavLink></li>
         <li><NavLink to='/netflix'>netflix</NavLink></li>
         <li><NavLink to='/order/salad'>Our Shop</NavLink></li>
-        <li><Link to='/order/salad'>
+
+        <li><Link to='/dashboard/cart'>
             <button className="btn btn-sm">
                 <BsCart2 />
                 <div className="badge badge-secondary">+{cart.length}</div>
