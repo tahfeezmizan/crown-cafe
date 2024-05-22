@@ -26,10 +26,23 @@ async function run() {
         // Connect the client to the server	(optional starting in v4.7)
         await client.connect();
 
+        const userCollection = client.db("Crown-cafeDB").collection("users");
         const menuCollection = client.db("Crown-cafeDB").collection("menu");
         const reviewsCollection = client.db("Crown-cafeDB").collection("reviews");
         const cartCollection = client.db("Crown-cafeDB").collection("carts");
 
+
+        //users api
+        app.post('/users', async (req, res) => {
+            try {
+                const user = req.body;
+                const result = await userCollection.insertOne(user)
+                res.send(result)
+            } catch (error) {
+                console.error("Error fetching queries:", error);
+                res.status(500).send("Error fetching queries");
+            }
+        })
 
         // get api
         app.get('/menu', async (req, res) => {
