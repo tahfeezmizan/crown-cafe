@@ -33,9 +33,27 @@ async function run() {
 
 
         //users api
+        app.get('/users', async (req, res) => {
+            try {
+                const result = await userCollection.find().toArray();
+                res.send(result);
+            } catch (error) {
+                console.error("Error fetching queries:", error);
+                res.status(500).send("Error fetching queries");
+            }
+        })
+
+        // post single user data on batabase
         app.post('/users', async (req, res) => {
             try {
                 const user = req.body;
+                // check user email already exists
+                const query = { email: user.email };
+                const existingUser = await userCollection.findOne(query);
+                if (existingUser) {
+                    return res.send({ message: 'user already exists', insertedId: null })
+                }
+
                 const result = await userCollection.insertOne(user)
                 res.send(result)
             } catch (error) {
@@ -44,6 +62,20 @@ async function run() {
             }
         })
 
+        // user delete api 
+        app.delete('/users/:id', async (req, res) => {
+            try {
+                const id = req.params.id;
+                const query = { _id: new ObjectId(id) };
+                const result = await userCollection.deleteOne(query);
+                res.send(result)
+            } catch (error) {
+                console.error("Error fetching queries:", error);
+                res.status(500).send("Error fetching queries");
+            }
+        })
+
+        // menu releted api 
         // get api
         app.get('/menu', async (req, res) => {
             try {
