@@ -1,14 +1,22 @@
+import { useQuery } from "@tanstack/react-query";
+import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import AxiosSecure from "../../../Hook/AxiosSecure";
 import { MdDeleteOutline } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
 import Swal from "sweetalert2";
-import UseCarts from "../../../Hook/UseCarts";
-import { axiosSecure } from "../../../Hook/AxiosSecure";
 
-const Cart = () => {
-    const [cart, refetch] = UseCarts();
+const AllUsers = () => {
+    const axiosSecure = AxiosSecure();
 
-    const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+    const { data: users = [], refetch } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/users');
+            return res.data;
+        }
+    });
 
-    const handleDelete = id => {
+    const handleDeleteUser = (user) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -19,7 +27,7 @@ const Cart = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.delete(`/carts/${id}`)
+                axiosSecure.delete(`/users/${user}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             refetch(),
@@ -34,37 +42,43 @@ const Cart = () => {
         });
     }
 
-
     return (
         <div>
-            <div className="flex justify-around">
-                <h1 className="text-5xl my-20">Total orders: {cart.length}</h1>
-                <h1 className="text-5xl my-20">Total Price: ${totalPrice}</h1>
-                <h1 className="text-5xl my-20">Pay</h1>
-            </div>
-            <div className="">
+            <SectionTitle
+                subHeading="How Many??"
+                Heading="Manage All Users"
+            ></SectionTitle>
+
+            <div className="w-3/4 mx-auto bg-white p-10">
                 <div className="overflow-x-auto">
+                    <h1 className="text-4xl mb-6">Total User {users.length}</h1>
                     <table className="table">
                         {/* head */}
                         <thead className="bg-yellow-500 text-white text-xl">
                             <tr>
                                 <th></th>
-                                <th>Item Image</th>
-                                <th>Item Name</th>
-                                <th>Price</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                cart.map((item, index) => <tr key={item._id}>
+                                users?.map((item, index) => <tr key={item._id}>
                                     <th>{index + 1}</th>
-                                    <td><img src={item?.image} className="w-24" alt="" /></td>
                                     <td>{item?.name}</td>
-                                    <td>{item?.price}</td>
+                                    <td>{item?.email}</td>
+                                    <td>
+                                        <button
+                                            onClick={() => handleDeleteUser(item._id)}
+                                            className="text-2xl">
+                                            <FaUser />
+                                        </button>
+                                    </td>
                                     <td >
                                         <button
-                                            onClick={() => handleDelete(item._id)}
+                                            onClick={() => handleDeleteUser(item._id)}
                                             className="text-3xl">
                                             <MdDeleteOutline />
                                         </button>
@@ -80,4 +94,4 @@ const Cart = () => {
     );
 };
 
-export default Cart;
+export default AllUsers;

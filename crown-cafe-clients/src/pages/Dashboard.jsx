@@ -70,7 +70,7 @@ const Dashboard = () => {
                 </ul>
             </div>
 
-            <div className="bg-gray-300 flex-1 p-10">
+            <div className="bg-gray-100 flex-1 p-10">
                 <Outlet></Outlet>
             </div>
         </div>

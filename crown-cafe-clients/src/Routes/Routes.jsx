@@ -11,6 +11,7 @@ import NetFlex from "../pages/Sheard/NetFlex";
 import PrivateRoutes from "./PrivateRoutes";
 import Dashboard from "../pages/Dashboard";
 import Cart from "../pages/Dashboard/Cart/Cart";
+import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 
 const router = createBrowserRouter([
     {
@@ -52,6 +53,12 @@ const router = createBrowserRouter([
             {
                 path: 'cart',
                 element: <Cart></Cart>
+            },
+
+            // admin panel
+            {
+                path: 'allusers',
+                element: <AllUsers />
             }
         ]
     }
