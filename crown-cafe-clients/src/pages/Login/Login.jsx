@@ -8,6 +8,7 @@ import UseAuth from "../../Hook/UseAuth";
 import loginBg from "../../assets/others/authentication.png";
 import loginImg from "../../assets/others/authentication2 1.png";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
+import { toast } from "react-toastify";
 
 const Login = () => {
     const { singInUser } = UseAuth();
@@ -41,7 +42,7 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 navigate(from, { replace: true })
-                alert('User Sing In Sucessfully')
+                toast.success('User Sing In Sucessfully')
             })
     }
 
