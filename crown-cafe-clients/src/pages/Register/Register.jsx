@@ -7,8 +7,12 @@ import { Link, useNavigate } from "react-router-dom";
 import loginBg from "../../assets/others/authentication.png";
 import loginImg from "../../assets/others/authentication2 1.png";
 import UseAuth from "../../Hook/UseAuth";
+import UseAxiosPublic from "../../Hook/UseAxiosPublic";
+import { toast } from "react-toastify";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const Register = () => {
+    const axiosPublic = UseAxiosPublic();
     const { createUser, updateUserProfile } = UseAuth();
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
@@ -26,17 +30,27 @@ const Register = () => {
 
     const onSubmit = (data) => {
         const { name, photoUrl, email, password } = data;
-        console.log(data);
+        // console.log(data);
 
         createUser(email, password)
             .then(result => {
                 const signUpUser = result.user;
-                console.log(signUpUser);
+                // console.log(signUpUser);
                 updateUserProfile(name, photoUrl)
                     .then(() => {
-                        alert('User Profile Update');
-                        reset();
-                        navigate('/')
+                        const userInfo = {
+                            name: name,
+                            email: email,
+                        }
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    // console.log('user added on datebase');
+                                    toast.success('User Created Sucessfully');
+                                    reset();
+                                    navigate('/')
+                                }
+                            })
                     })
                     .catch(error => console.log(error))
             })
@@ -133,6 +147,9 @@ const Register = () => {
                         </form>
                         <div className="text-center">
                             <div className="divider pb-3">or connect with</div>
+                        </div>
+                        <div className="">
+                            <SocialLogin></SocialLogin>
                         </div>
                         <h3 className="text-center pt-5">Have an account? <Link to="/login" className="text-blue-600 hover:text-[#d01818] font-bold">Log In</Link></h3>
                     </div>

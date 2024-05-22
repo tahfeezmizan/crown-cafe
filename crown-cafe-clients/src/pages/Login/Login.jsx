@@ -1,12 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import loginImg from "../../assets/others/authentication2 1.png"
-import loginBg from "../../assets/others/authentication.png"
-import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+import { LoadCanvasTemplate, loadCaptchaEnginge, validateCaptcha } from 'react-simple-captcha';
 import UseAuth from "../../Hook/UseAuth";
+import loginBg from "../../assets/others/authentication.png";
+import loginImg from "../../assets/others/authentication2 1.png";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const Login = () => {
     const { singInUser } = UseAuth();
@@ -127,6 +128,9 @@ const Login = () => {
                         {/* third party login method */}
                         <div className="text-center">
                             <div className="divider pb-3">or connected with</div>
+                        </div>
+                        <div className="">
+                            <SocialLogin></SocialLogin>
                         </div>
 
                         <h3 className="text-center pt-5">Need an account? <Link to="/register" className="text-blue-600 hover:text-[#d01818] font-bold">Create Account</Link></h3>
