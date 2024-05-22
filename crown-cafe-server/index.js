@@ -88,7 +88,8 @@ async function run() {
                 const result = await cartCollection.deleteOne(query)
                 res.send(result)
             } catch (error) {
-
+                console.error("Error fetching queries:", error);
+                res.status(500).send("Error fetching queries");
             }
         })
 

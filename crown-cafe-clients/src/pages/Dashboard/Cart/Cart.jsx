@@ -1,13 +1,12 @@
 import { MdDeleteOutline } from "react-icons/md";
-import UseCarts from "../../../Hook/UseCarts";
 import Swal from "sweetalert2";
-import AxiosSecure from "../../../Hook/AxiosSecure";
+import UseCarts from "../../../Hook/UseCarts";
+import { axiosSecure } from "../../../Hook/AxiosSecure";
 
 const Cart = () => {
-    const [cart] = UseCarts();
-    const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+    const [cart, refetch] = UseCarts();
 
-    const [axiosSecure] = AxiosSecure();
+    const totalPrice = cart.reduce((total, item) => total + item.price, 0);
 
     const handleDelete = id => {
         Swal.fire({
@@ -21,11 +20,16 @@ const Cart = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 axiosSecure.delete(`/carts/${id}`)
-                // Swal.fire({
-                //     title: "Deleted!",
-                //     text: "Your file has been deleted.",
-                //     icon: "success"
-                // });
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            refetch(),
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your Item has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
             }
         });
     }
