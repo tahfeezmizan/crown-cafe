@@ -1,6 +1,7 @@
 import { GoogleAuthProvider, TwitterAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../Firebase/Firebase.config";
+import UseAxiosPublic from "../Hook/UseAxiosPublic";
 
 export const AuthContext = createContext(null);
 
@@ -8,6 +9,7 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loaidng, setLoading] = useState(true);
+    const axiosPublic = UseAxiosPublic();
 
     // social login
     const googleProvider = new GoogleAuthProvider();
@@ -50,7 +52,19 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
-            console.log('current user', currentUser);
+            if(currentUser){
+                // get token and store
+                const userInfo = {email: currentUser?.email}
+                axiosPublic.post('/jwt', userInfo)
+                .then(res => {
+                    if(res?.data?.token){
+                        localStorage.setItem('access-token', res?.data?.token)
+                    }
+                })
+            }else{
+                // TODO: remove token from brownser cookie
+                localStorage.removeItem("access-token")
+            }
         })
         return () => {
             return unsubscribe();
