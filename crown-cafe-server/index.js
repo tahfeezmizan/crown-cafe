@@ -60,7 +60,27 @@ async function run() {
                 console.error("Error fetching queries:", error);
                 res.status(500).send("Error fetching queries");
             }
+        });
+
+
+        // create user role api
+        app.patch('/users/admin/:id', async (req, res) => {
+            try {
+                const id = req.params.id;
+                const filter = { _id: new ObjectId(id) };
+                const updatedDoc = {
+                    $set: {
+                        role: 'admin'
+                    }
+                }
+                const result = await userCollection.updateOne(filter, updatedDoc);
+                res.send(result)
+            } catch (error) {
+                console.error("Error fetching queries:", error)
+                res.status(5000).send("Error fetching queries")
+            }
         })
+
 
         // user delete api 
         app.delete('/users/:id', async (req, res) => {
@@ -125,7 +145,7 @@ async function run() {
         });
 
 
-        //
+        //delete product from cart
         app.delete("/carts/:id", async (req, res) => {
             try {
                 const id = req.params.id;
