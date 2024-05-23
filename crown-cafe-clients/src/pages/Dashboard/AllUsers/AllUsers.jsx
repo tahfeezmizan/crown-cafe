@@ -16,6 +16,17 @@ const AllUsers = () => {
         }
     });
 
+    const handleMakeAdmin = users => {
+        axiosSecure.patch(`/users/admin/${users}`)
+        .then(res => {
+            console.log(res.data);
+            if(res?.data?.modifiedCount){
+                refetch();
+                alert(`${users?.name} Is Admin Now!`)
+            }
+        })
+    }
+
     const handleDeleteUser = (user) => {
         Swal.fire({
             title: "Are you sure?",
@@ -65,20 +76,20 @@ const AllUsers = () => {
                         </thead>
                         <tbody>
                             {
-                                users?.map((item, index) => <tr key={item._id}>
+                                users?.map((user, index) => <tr key={user._id}>
                                     <th>{index + 1}</th>
-                                    <td>{item?.name}</td>
-                                    <td>{item?.email}</td>
+                                    <td>{user?.name}</td>
+                                    <td>{user?.email}</td>
                                     <td>
-                                        <button
-                                            onClick={() => handleDeleteUser(item._id)}
+                                        {user?.role=== 'admin' ? "Admin" : <button
+                                            onClick={() => handleMakeAdmin(user?._id)}
                                             className="text-2xl">
                                             <FaUser />
-                                        </button>
+                                        </button>}
                                     </td>
                                     <td >
                                         <button
-                                            onClick={() => handleDeleteUser(item._id)}
+                                            onClick={() => handleDeleteUser(user?._id)}
                                             className="text-3xl">
                                             <MdDeleteOutline />
                                         </button>
