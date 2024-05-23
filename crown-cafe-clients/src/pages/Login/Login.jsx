@@ -16,7 +16,7 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location?.state?.from?.pathname || '/';
-    console.log("login page location pathname", location.state);
+    // console.log("login page location pathname", location.state);
 
     const [showPassword, setShowPassword] = useState(false);
     const togglePasswordVisibility = () => {

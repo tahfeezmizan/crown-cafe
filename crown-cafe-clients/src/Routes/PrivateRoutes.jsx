@@ -4,12 +4,12 @@ import UseAuth from "../Hook/UseAuth";
 const PrivateRoutes = ({ children }) => {
     const { user, loaidng } = UseAuth();
     const location = useLocation();
-    console.log(location);
+    // console.log(location);
 
 
-    // if (loaidng) {
-    //     return <span class="loading loading-spinner loading-lg text-secondary py-48"></span>
-    // }
+    if (loaidng) {
+        return <span class="loading loading-spinner loading-lg text-secondary py-48"></span>
+    }
 
     if (user) {
         return children

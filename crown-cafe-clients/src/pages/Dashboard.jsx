@@ -1,9 +1,10 @@
 import { FaBook, FaCalendar, FaEnvelope, FaHome, FaList, FaShoppingBag, FaShoppingCart, FaUsers, FaUtensils, FaWallet } from "react-icons/fa";
 import { IoMenu } from "react-icons/io5";
 import { Link, NavLink, Outlet } from "react-router-dom";
+import UseAdmin from "../Hook/UseAdmin";
 
 const Dashboard = () => {
-    const isAdmin = true;
+    const [isAdmin] = UseAdmin();
 
     return (
         <div className="flex h-screen">

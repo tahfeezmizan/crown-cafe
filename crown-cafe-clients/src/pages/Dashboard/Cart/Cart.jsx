@@ -71,7 +71,6 @@ const Cart = () => {
                                     </td>
                                 </tr>)
                             }
-
                         </tbody>
                     </table>
                 </div>

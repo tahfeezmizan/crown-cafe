@@ -5,7 +5,6 @@ import UseAxiosPublic from "../Hook/UseAxiosPublic";
 
 export const AuthContext = createContext(null);
 
-
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loaidng, setLoading] = useState(true);
@@ -27,27 +26,23 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password)
     }
 
-
     //google login
     const googleLogin = () => {
         setLoading(true);
         return signInWithPopup(auth, googleProvider);
     }
 
-
     // update profile 
     const updateUserProfile = (name, photo) => {
         return updateProfile(auth.currentUser, {
             displayName: name, photoURL: photo
         })
-
     }
 
     const logOut = () => {
         setUser(null)
         signOut(auth);
     }
-
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
@@ -60,6 +55,7 @@ const AuthProvider = ({ children }) => {
                     if(res?.data?.token){
                         localStorage.setItem('access-token', res?.data?.token)
                     }
+                    setLoading(false)
                 })
             }else{
                 // TODO: remove token from brownser cookie
