@@ -33,24 +33,60 @@ async function run() {
         const cartCollection = client.db("Crown-cafeDB").collection("carts");
 
         // jwt releted api
-        app.post('/jwt', async(req, res) => {
+        app.post('/jwt', async (req, res) => {
             const user = req.body;
             const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
                 expiresIn: '2h',
             });
-            res.send({token})
-        })
+            res.send({ token })
+        });
+
+        // middleware
+        const verifyToken = (req, res, next) => {
+            console.log(req.headers.authorization);
+            console.log('inside Veryfy token', req.headers.authorization);
+            if (!req?.headers?.authorization) {
+                return res.status(401).send({ message: "Forbidden access" })
+            }
+            const token = req?.headers?.authorization.split(' ')[1];
+            jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (error, decoded) => {
+                if (error) {
+                    return res.status(401).send({ message: "Forbidden access" })
+                }
+                req.decoded = decoded;
+                next();
+            })
+        }
 
 
         //users api
-        app.get('/users', async (req, res) => {
+        app.get('/users', verifyToken, async (req, res) => {
             try {
-                console.log(req.headers);
                 const result = await userCollection.find().toArray();
                 res.send(result);
             } catch (error) {
                 console.error("Error fetching queries:", error);
                 res.status(500).send("Error fetching queries");
+            }
+        })
+
+        // check user role
+        app.get('/users/admin/:email', verifyToken, async (req, res) => {
+            try {
+                const email = req.params.email;
+                if (email !== req.decoded.email) {
+                    return res.status(403).send({ message: "Unauthorized" })
+                }
+
+                const query = { email: email }
+                const user = await userCollection.findOne(query);
+                let admin = false;
+                if (user) {
+                    admin = user?.role === 'admin'
+                }
+                res.send({ admin })
+            } catch (error) {
+                return res.status(403).send({ message: "Unauthorized" })
             }
         })
 
