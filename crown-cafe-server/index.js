@@ -43,15 +43,15 @@ async function run() {
 
         // middleware
         const verifyToken = (req, res, next) => {
-            console.log(req.headers.authorization);
-            console.log('inside Veryfy token', req.headers.authorization);
+            // console.log(req.headers.authorization);
+            // console.log('inside Veryfy token', req.headers.authorization);
             if (!req?.headers?.authorization) {
                 return res.status(401).send({ message: "Forbidden access" })
             }
             const token = req?.headers?.authorization.split(' ')[1];
             jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (error, decoded) => {
                 if (error) {
-                    return res.status(401).send({ message: "Forbidden access" })
+                    return res.status(401).send({ message: "Forbidden access" });
                 }
                 req.decoded = decoded;
                 next();
@@ -155,12 +155,25 @@ async function run() {
             }
         })
 
+
         // menu releted api 
         // get api
         app.get('/menu', async (req, res) => {
             try {
                 const result = await menuCollection.find().toArray();
                 res.send(result);
+            } catch (error) {
+                console.error("Error fetching queries:", error);
+                res.status(500).send("Error fetching queries");
+            }
+        });
+
+        // menu post
+        app.post('/menu', verifyToken, verifyAdmin, async (req, res) => {
+            try {
+                const item = req.body;
+                const result = await menuCollection.insertOne(item);
+                res.send(result)
             } catch (error) {
                 console.error("Error fetching queries:", error);
                 res.status(500).send("Error fetching queries");
