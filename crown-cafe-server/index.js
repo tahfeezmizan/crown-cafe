@@ -194,6 +194,29 @@ async function run() {
         });
 
 
+        // menu item update api
+        app.patch('/menu/:id', verifyToken, verifyAdmin, async (req, res) => {
+            try {
+                const item = req.body;
+                const id = req.params.id;
+                const filter = { _id: new ObjectId(id) }
+                const updatedDoc = {
+                    $set: {
+                        name: item.name,
+                        price: item.price,
+                        recipe: item.recipe,
+                        category: item.category,
+                        image: item.image,
+                    }
+                }
+                const result = await menuCollection.updateOne(filter, updatedDoc);
+                res.send(result)
+            } catch (error) {
+                console.error("Error fetching menu:", error);
+                res.status(500).send("Error fetching menu");
+            }
+        })
+
         // menu item delete 
         app.delete('/menu/:id', verifyToken, verifyAdmin, async (req, res) => {
             try {
