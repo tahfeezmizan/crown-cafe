@@ -6,10 +6,10 @@ import Swal from "sweetalert2";
 import AxiosSecure from "../../../Hook/AxiosSecure";
 
 const ManageItem = () => {
-    const [menu] = useMenu();
+    const [menu, , refetch] = useMenu();
     const axiosSecure = AxiosSecure();
 
-    const handleDelete = (user) => {
+    const handleDelete = (item) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -20,15 +20,14 @@ const ManageItem = () => {
             confirmButtonText: "Yes, delete it!"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const res = await axiosSecure.delete(`/users/${user}`);
-                console.log(res.data);
+                const res = await axiosSecure.delete(`/menu/${item}`);
                 if (res.data.deletedCount > 0) {
                     Swal.fire({
                         title: "Deleted!",
                         text: "Your Item has been deleted.",
                         icon: "success"
                     });
-                    // Optionally, you can refetch the menu or update the state to reflect the deletion
+                    refetch()
                 }
             }
         });

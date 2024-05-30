@@ -14,6 +14,7 @@ const AddItem = () => {
 
     const {
         register,
+        reset,
         handleSubmit,
         formState: { errors },
     } = useForm()
@@ -42,6 +43,7 @@ const AddItem = () => {
             console.log('data send data base', menuRes.data);
             if (menuRes?.data?.insertedId) {
                 toast.success('Added New Food in Menu')
+                reset()
             }
         }
         console.log('image url', res.data)
