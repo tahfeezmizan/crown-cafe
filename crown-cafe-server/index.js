@@ -136,10 +136,10 @@ async function run() {
                 const result = await userCollection.updateOne(filter, updatedDoc);
                 res.send(result)
             } catch (error) {
-                console.error("Error fetching queries:", error)
-                res.status(5000).send("Error fetching queries")
+                console.error("Error fetching user:", error)
+                res.status(5000).send("Error fetching user")
             }
-        })
+        });
 
 
         // user delete api 
@@ -150,10 +150,10 @@ async function run() {
                 const result = await userCollection.deleteOne(query);
                 res.send(result)
             } catch (error) {
-                console.error("Error fetching queries:", error);
-                res.status(500).send("Error fetching queries");
+                console.error("Error fetching user:", error);
+                res.status(500).send("Error fetching users");
             }
-        })
+        });
 
 
         // menu releted api 
@@ -163,10 +163,23 @@ async function run() {
                 const result = await menuCollection.find().toArray();
                 res.send(result);
             } catch (error) {
-                console.error("Error fetching queries:", error);
-                res.status(500).send("Error fetching queries");
+                console.error("Error fetching menu:", error);
+                res.status(500).send("Error fetching menu");
             }
         });
+
+        // update menu item 
+        app.get('/menu/:id', async (req, res) => {
+            try {
+                const id = req.params.id;
+                const query = { _id: new ObjectId(id) };
+                const result = await menuCollection.findOne(query);
+                res.send(result);
+            } catch (error) {
+                console.error("Error fetching menu:", error);
+                res.status(500).send("Error fetching menu");
+            }
+        })
 
         // menu post
         app.post('/menu', verifyToken, verifyAdmin, async (req, res) => {
@@ -175,10 +188,25 @@ async function run() {
                 const result = await menuCollection.insertOne(item);
                 res.send(result)
             } catch (error) {
-                console.error("Error fetching queries:", error);
-                res.status(500).send("Error fetching queries");
+                console.error("Error fetching menu:", error);
+                res.status(500).send("Error fetching menu");
             }
-        })
+        });
+
+
+        // menu item delete 
+        app.delete('/menu/:id', verifyToken, verifyAdmin, async (req, res) => {
+            try {
+                const id = req.params.id;
+                const query = { _id: new ObjectId(id) }
+                const result = await menuCollection.deleteOne(query);
+                res.send(result);
+            } catch (error) {
+                console.error("Error fetching menu:", error);
+                res.status(500).send("Error fetching menu");
+            }
+        });
+
 
         // get reviews data 
         app.get("/reviews", async (req, res) => {
@@ -186,8 +214,8 @@ async function run() {
                 const result = await reviewsCollection.find().toArray();
                 res.send(result)
             } catch (error) {
-                console.error("Error fetching queries:", error);
-                res.status(500).send("Error fetching queries");
+                console.error("Error fetching reviews:", error);
+                res.status(500).send("Error fetching reviews");
             }
         })
 
@@ -199,8 +227,8 @@ async function run() {
                 const result = await cartCollection.find(query).toArray();
                 res.send(result)
             } catch (error) {
-                console.error("Error fetching queries:", error);
-                res.status(500).send("Error fetching queries");
+                console.error("Error fetching carts:", error);
+                res.status(500).send("Error fetching carts");
             }
 
         })
@@ -212,8 +240,8 @@ async function run() {
                 const result = await cartCollection.insertOne(cartItem);
                 res.send(result)
             } catch (error) {
-                console.error("Error fetching queries:", error);
-                res.status(500).send("Error fetching queries");
+                console.error("Error fetching carts:", error);
+                res.status(500).send("Error fetching carts");
             }
         });
 
@@ -226,8 +254,8 @@ async function run() {
                 const result = await cartCollection.deleteOne(query)
                 res.send(result)
             } catch (error) {
-                console.error("Error fetching queries:", error);
-                res.status(500).send("Error fetching queries");
+                console.error("Error fetching carts:", error);
+                res.status(500).send("Error fetching carts");
             }
         })
 
