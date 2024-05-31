@@ -3,6 +3,7 @@ import { FaUtensils } from "react-icons/fa";
 import { useLoaderData } from "react-router-dom";
 import AxiosSecure from "../../../Hook/AxiosSecure";
 import UseAxiosPublic from "../../../Hook/UseAxiosPublic";
+import { toast } from "react-toastify";
 
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -42,12 +43,13 @@ const UpdateItem = () => {
             // store data to database
             const menuRes = await axiosSecure.patch(`/menu/${_id}`, menuItem)
             console.log('data send data base', menuRes.data);
-            if (menuRes?.data?.insertedId) {
+
+            if (menuRes?.data?.modifiedCount > 0) {
                 toast.success('Food Item is Update')
                 reset()
             }
         }
-        console.log('image url', res.data)
+        // console.log('image url', res.data)
     }
 
     return (

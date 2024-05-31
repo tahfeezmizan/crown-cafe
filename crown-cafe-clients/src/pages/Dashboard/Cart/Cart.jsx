@@ -2,6 +2,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import Swal from "sweetalert2";
 import UseCarts from "../../../Hook/UseCarts";
 import { axiosSecure } from "../../../Hook/AxiosSecure";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
     const [cart, refetch] = UseCarts();
@@ -40,7 +41,11 @@ const Cart = () => {
             <div className="flex justify-around">
                 <h1 className="text-5xl my-20">Total orders: {cart.length}</h1>
                 <h1 className="text-5xl my-20">Total Price: ${totalPrice}</h1>
-                <h1 className="text-5xl my-20">Pay</h1>
+                {cart.length ? <Link to="/dashboard/payment">
+                    <button className="btn bg-yellow-500 text-4xl my-20">Pay</button>
+                </Link>
+                    :
+                    <button disabled className="btn bg-yellow-500 text-4xl my-20">Pay</button>}
             </div>
             <div className="">
                 <div className="overflow-x-auto">
