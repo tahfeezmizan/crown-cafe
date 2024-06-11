@@ -15,6 +15,7 @@ const FoodCard = ({ item }) => {
     const handleAddToCard = food => {
         if (user && user?.email) {
             console.log(food, user?.email);
+            
             const cartItem = {
                 menuId: _id,
                 email: user?.email,

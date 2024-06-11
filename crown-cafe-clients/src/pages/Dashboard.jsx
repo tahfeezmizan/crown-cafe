@@ -2,6 +2,7 @@ import { FaBook, FaCalendar, FaEnvelope, FaHome, FaList, FaShoppingBag, FaShoppi
 import { IoMenu } from "react-icons/io5";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import UseAdmin from "../Hook/UseAdmin";
+import Payment from "./Dashboard/Payment/Payment";
 
 const Dashboard = () => {
     const [isAdmin] = UseAdmin();
@@ -72,6 +73,11 @@ const Dashboard = () => {
                             <li>
                                 <NavLink to="/dashboard/mybooking">
                                     My Booking
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/mybooking">
+                                    <Payment>Pay</Payment>
                                 </NavLink>
                             </li>
                         </>
